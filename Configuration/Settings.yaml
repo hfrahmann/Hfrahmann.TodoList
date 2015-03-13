@@ -1,0 +1,15 @@
+
+TYPO3:
+  Neos:
+    modules:
+      management:
+        submodules:
+          hftodolist:
+            label: 'Todo'
+            controller: '\Hfrahmann\TodoList\Controller\Module\TodoListController'
+            description: 'With the Todo list module you can organize things within your team or for yourself.'
+            icon: 'icon-check'
+            resource: 'Hfrahmann_TodoList_Backend_Module_TodoList'
+            additionalResources:
+              styleSheets:
+                - resource://Hfrahmann.TodoList/Public/BackendStyle.css

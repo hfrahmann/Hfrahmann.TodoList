@@ -1,0 +1,9 @@
+
+resources:
+  methods:
+    Hfrahmann_TodoList_Backend_Module_TodoList: 'method(Hfrahmann\TodoList\Controller\Module\TodoListController->(.*)Action())'
+
+acls:
+  'TYPO3.Neos:Editor':
+    methods:
+      Hfrahmann_TodoList_Backend_Module_TodoList: GRANT
