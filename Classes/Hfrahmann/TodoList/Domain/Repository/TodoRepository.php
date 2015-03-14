@@ -15,6 +15,14 @@ use TYPO3\Flow\Annotations as Flow;
  */
 class TodoRepository extends \TYPO3\Flow\Persistence\Repository {
 
+    /**
+     * Construct
+     */
+    public function __construct() {
+        $this->defaultOrderings = array('done' => 'ASC', 'creationDate' => 'DESC');
+        parent::__construct();
+    }
+
 }
 
 ?>

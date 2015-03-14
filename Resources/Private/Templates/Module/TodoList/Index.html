@@ -1,80 +1,77 @@
-<div class="neos-row-fluid">
-    <div class="neos-span12 hftodolist-options">
-
-        <div style="float:left">
-            <a href="#"><i class="icon-plus"></i> Add</a>
-        </div>
-    </div>
-</div>
-
 <div class="neos-row-fluid neos neos-module media-browser media-module">
     <div class="neos-span2 neos-sort-tags">
 
-            <h2>Categories</h2>
-            <ul class="neos-tags-list">
+        <h2>
+            Categories
+            <span id="neos-tags-list-edit-toggle" class="neos-button"><i class="icon-pencil"></i></span>
+        </h2>
+        <ul class="neos-tags-list">
+            <li>
+                <f:link.action action="index">
+                    All
+                    <span class="count">{allTodosCount}</span>
+                </f:link.action>
+            </li>
 
+            <f:for each="{categories}" as="category">
                 <li>
-                    <a href="#">All <span class="count">9</span></a>
+                    <f:link.action action="index" class="neos-active" arguments="{category: category}">
+                        {category.name}
+                        <span class="count">{category.todos -> f:count()}</span>
+                    </f:link.action>
                 </li>
-                <li>
-                    <a href="#">Development <span class="count">2</span></a>
-                </li>
-                <li>
-                    <a href="#" class="neos-active">Receipts <span class="count">4</span></a>
-                </li>
-            </ul>
+            </f:for>
+
+        </ul>
+        <br/><br/>
+        <f:link.action action="add" class="neos-button neos-button-primary hftodos-button-add" title="Create Todo">
+            Create Todo
+        </f:link.action>
 
     </div>
 
     <div class="neos-span10">
 
-        <table class="neos-table">
-            <thead>
-                <tr>
-                    <th width="30">Done</th>
-                    <th>Title</th>
-                    <th width="200">Creation date</th>
-                    <th width="200">Author</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <label for="id1" class="neos-checkbox"><f:form.checkbox name="nodes[]" value="{false}" id="id1" /><span></span></label>
-                    </td>
-                    <td>
-                        <h3>Testtitle Lorem Ipsum</h3>
-                        <p style="color:#EEE;font-size: 10pt;margin-bottom:15px;">dfdfj fndfjgndjklfgn djkflng fdjkngk dfdfj fndfjgndjklfgn djkflng fdjkngk dfdfj fndfjgndjklfgn djkflng fdjkngk dfdfj fndfjgndjklfgn djkflng fdjkngk dfdfj fndfjgndjklfgn djkflng fdjkngk </p>
-                    </td>
-                    <td>01.01.2015  12:00</td>
-                    <td>John Doe</td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="id2" class="neos-checkbox"><f:form.checkbox name="nodes[]" value="{false}" id="id2" /><span></span></label>
-                    </td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="id2" class="neos-checkbox"><f:form.checkbox name="nodes[]" value="{false}" id="id2" /><span></span></label>
-                    </td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="id2" class="neos-checkbox"><f:form.checkbox name="nodes[]" value="{false}" id="id2" /><span></span></label>
-                    </td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table>
+        <f:widget.paginate objects="{todos}" as="paginatedTodos" configuration="{itemsPerPage: 20}">
+            <table class="neos-table">
+                <thead>
+                    <tr>
+                        <th width="20"></th>
+                        <th>Title</th>
+                        <th width="160">Created</th>
+                        <th width="15%">Author</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <f:for each="{paginatedTodos}" key="key" as="todo">
+                        <tr>
+                            <td>
+                                <label for="check-{key}" class="neos-checkbox">
+                                    <f:form.checkbox name="todos[]" checked="{todo.done}" value="{true}"
+                                                     id="check-{key}"/>
+                                    <span></span></label>
+                            </td>
+                            <td>
+                                <f:link.action action="details" arguments="{todo: todo}">{todo.title}</f:link.action>
+                            </td>
+                            <td>
+                                <f:format.date format="d.m.Y | H:i">{todo.creationDate}</f:format.date>
+                            </td>
+                            <td>-</td>
+                            <td class="neos-action neos-aRight">
+                                <a class="neos-button">
+                                    <i class="icon-pencil icon-white"></i>
+                                </a>
+                                <a class="neos-button neos-button-danger">
+                                    <i class="icon-trash icon-white"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </f:for>
+                </tbody>
+            </table>
+        </f:widget.paginate>
 
     </div>
 </div>

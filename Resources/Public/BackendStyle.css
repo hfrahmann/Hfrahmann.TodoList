@@ -1,23 +1,4 @@
 
-.hftodolist-options {
-    overflow: hidden;
-    margin-bottom: 32px;
-    border-bottom: 1px solid #3f3f3f;
-}
-
-.hftodolist-options a {
-    display: block;
-    float: left;
-    height: 40px;
-    min-width: 24px;
-    line-height: 40px;
-    text-align: center;
-    padding: 0 8px;
-    color: #00b5ff;
-}
-
-.hftodolist-options i {
-    margin-right: 4px;
-    line-height: 40px;
-    vertical-align: middle;
+a.hftodos-button-add {
+    width: 100% !important;
 }
