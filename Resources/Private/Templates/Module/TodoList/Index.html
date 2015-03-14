@@ -7,7 +7,7 @@
         </h2>
         <ul class="neos-tags-list">
             <li>
-                <f:link.action action="index">
+                <f:link.action action="index" class="{f:if(condition:'{activeCategory}',else:'neos-active')}">
                     All
                     <span class="count">{allTodosCount}</span>
                 </f:link.action>
@@ -15,7 +15,7 @@
 
             <f:for each="{categories}" as="category">
                 <li>
-                    <f:link.action action="index" class="neos-active" arguments="{category: category}">
+                    <f:link.action action="index" class="{f:if(condition:'{category} == {activeCategory}',then:'neos-active')}" arguments="{category: category}">
                         {category.name}
                         <span class="count">{category.todos -> f:count()}</span>
                     </f:link.action>
@@ -32,7 +32,7 @@
 
     <div class="neos-span10">
 
-        <f:widget.paginate objects="{todos}" as="paginatedTodos" configuration="{itemsPerPage: 20}">
+        <f:widget.paginate objects="{todos}" as="paginatedTodos" configuration="{itemsPerPage: 15}">
             <table class="neos-table">
                 <thead>
                     <tr>
