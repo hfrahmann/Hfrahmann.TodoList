@@ -5,6 +5,8 @@ namespace Hfrahmann\TodoList\Controller\Module;
  * This script belongs to the TYPO3 Flow package "Hfrahmann.TodoList".    *
  *                                                                        */
 
+use Doctrine\Tests\ORM\Mapping\Cat;
+use Hfrahmann\ConsoleLogging\Logger;
 use Hfrahmann\TodoList\Domain\Model\Category;
 use Hfrahmann\TodoList\Domain\Model\Todo;
 use Hfrahmann\TodoList\Domain\Repository\CategoryRepository;
@@ -31,6 +33,12 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
     protected $todoRepository;
 
     /**
+     * @Flow\Inject
+     * @var \TYPO3\Flow\Security\Context
+     */
+    protected $securityContext;
+
+    /**
      * Index Action
      * @param Category $category
      */
@@ -51,8 +59,10 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
     /**
      * Add Action
      */
-    public function addAction() {
-        $todo = new Todo();
+    public function addAction(Todo $todo = NULL) {
+        if($todo === NULL) {
+            $todo = new Todo();
+        }
         $categories = $this->categoryRepository->findAll();
         $this->view->assign('categories', $categories);
         $this->view->assign('todo', $todo);
@@ -74,11 +84,13 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
      */
     public function saveAction(Todo $todo) {
         if($this->persistenceManager->isNewObject($todo)) {
+            $todo->setCreationDate(new \DateTime());
+            $todo->setAuthor($this->securityContext->getAccount());
             $this->todoRepository->add($todo);
         } else {
-            $this->persistenceManager->update($todo);
+            $this->todoRepository->update($todo);
         }
-        $this->redirect('index');
+        $this->redirect('details', NULL, NULL, array('todo' => $todo));
     }
 
     /**

@@ -56,13 +56,13 @@
                                 <f:link.action action="details" arguments="{todo: todo}">{todo.title}</f:link.action>
                             </td>
                             <td>
-                                <f:format.date format="d.m.Y | H:i">{todo.creationDate}</f:format.date>
+                                <f:format.date format="d.m.Y - H:i">{todo.creationDate}</f:format.date>
                             </td>
                             <td>-</td>
                             <td class="neos-action neos-aRight">
-                                <a class="neos-button">
+                                <f:link.action class="neos-button" action="edit" arguments="{todo: todo}">
                                     <i class="icon-pencil icon-white"></i>
-                                </a>
+                                </f:link.action>
                                 <a class="neos-button neos-button-danger">
                                     <i class="icon-trash icon-white"></i>
                                 </a>

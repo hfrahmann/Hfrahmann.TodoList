@@ -15,6 +15,14 @@ use TYPO3\Flow\Annotations as Flow;
  */
 class CategoryRepository extends \TYPO3\Flow\Persistence\Repository {
 
+    /**
+     * Construct
+     */
+    public function __construct() {
+        $this->defaultOrderings = array('name' => 'ASC');
+        parent::__construct();
+    }
+
 }
 
 ?>

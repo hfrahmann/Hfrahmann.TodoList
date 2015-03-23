@@ -1,0 +1,47 @@
+
+<div class="neos-row-fluid">
+    <fieldset class="neos-span5">
+        <legend>Info</legend>
+
+        <table class="neos-info-table">
+            <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{todo.title}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{todo.category.name}</td>
+            </tr>
+            <tr>
+                <th>Creation date</th>
+                <td><f:format.date format="d.m.Y - H:i">{todo.creationDate}</f:format.date></td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{todo.author}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </fieldset>
+    <fieldset class="neos-span6 neos-offset1">
+        <legend>Content</legend>
+
+        <f:format.nl2br>{todo.content}</f:format.nl2br>
+
+    </fieldset>
+</div>
+
+<f:form action="done">
+    <div class="neos-footer">
+        <f:link.action action="index" class="neos-button">Back</f:link.action>
+        <button class="neos-button neos-button-danger" data-toggle="modal" href="#delete">
+            <i class="icon-trash icon-white"></i> Delete todo
+        </button>
+        <f:link.action action="edit" arguments="{todo: todo}" class="neos-button">
+            <i class="icon-pencil icon-white"></i> Edit todo
+        </f:link.action>
+        <f:form.submit value="Mark as done" class="neos-button neos-button-primary" />
+    </div>
+</f:form>

@@ -48,6 +48,12 @@ class Todo {
     protected $done = FALSE;
 
     /**
+     * @var \TYPO3\Flow\Security\Account
+     * @ORM\ManyToOne
+     */
+    protected $author;
+
+    /**
      * Construct
      */
     public function __construct() {
@@ -122,6 +128,20 @@ class Todo {
      */
     public function setDone($done) {
         $this->done = $done;
+    }
+
+    /**
+     * @return \TYPO3\Flow\Security\Account
+     */
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    /**
+     * @param \TYPO3\Flow\Security\Account $author
+     */
+    public function setAuthor($author) {
+        $this->author = $author;
     }
 
 }

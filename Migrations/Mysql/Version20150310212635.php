@@ -18,7 +18,7 @@ class Version20150310212635 extends AbstractMigration {
 		$this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql");
 		
 		$this->addSql("CREATE TABLE hfrahmann_todolist_domain_model_category (persistence_object_identifier VARCHAR(40) NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(persistence_object_identifier)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB");
-		$this->addSql("CREATE TABLE hfrahmann_todolist_domain_model_todo (persistence_object_identifier VARCHAR(40) NOT NULL, category VARCHAR(40) DEFAULT NULL, done TINYINT(1) NOT NULL DEFAULT '0', title VARCHAR(255) NOT NULL, content VARCHAR(255) NOT NULL, creationdate DATETIME NOT NULL, INDEX IDX_9A9A386764C19C1 (category), PRIMARY KEY(persistence_object_identifier)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB");
+		$this->addSql("CREATE TABLE hfrahmann_todolist_domain_model_todo (persistence_object_identifier VARCHAR(40) NOT NULL, category VARCHAR(40) DEFAULT NULL, done TINYINT(1) NOT NULL DEFAULT '0', title VARCHAR(255) NOT NULL, content VARCHAR(255) NOT NULL, creationdate DATETIME NOT NULL, author VARCHAR(40) DEFAULT NULL, INDEX IDX_9A9A386764C19C1 (category), PRIMARY KEY(persistence_object_identifier)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB");
 		$this->addSql("ALTER TABLE hfrahmann_todolist_domain_model_todo ADD CONSTRAINT FK_9A9A386764C19C1 FOREIGN KEY (category) REFERENCES hfrahmann_todolist_domain_model_category (persistence_object_identifier)");
 	}
 

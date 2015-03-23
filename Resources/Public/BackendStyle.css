@@ -2,3 +2,7 @@
 a.hftodos-button-add {
     width: 100% !important;
 }
+
+textarea.hftodos-content {
+    min-height: 150px !important;
+}

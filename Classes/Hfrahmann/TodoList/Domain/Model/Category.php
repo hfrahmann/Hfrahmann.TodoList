@@ -59,6 +59,10 @@ class Category {
         return $this->todos;
     }
 
+    public function __toString() {
+        return $this->name;
+    }
+
 }
 
 ?>
