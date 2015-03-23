@@ -39,6 +39,12 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
     protected $securityContext;
 
     /**
+     * @Flow\Inject
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * Index Action
      * @param Category $category
      */
@@ -91,6 +97,32 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
             $this->todoRepository->update($todo);
         }
         $this->redirect('details', NULL, NULL, array('todo' => $todo));
+    }
+
+    /**
+     * @param Todo $todo
+     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     */
+    public function deleteAction(Todo $todo) {
+        $this->todoRepository->remove($todo);
+        $this->redirect('index');
+    }
+
+    /**
+     * @param Todo $todo
+     * @param bool $done
+     * @param bool $showDetails
+     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     * @return string
+     */
+    public function markTodoAction(Todo $todo, $done, $showDetails = FALSE) {
+        $todo->setDone($done);
+        $this->todoRepository->update($todo);
+
+        if($showDetails === TRUE) {
+            $this->redirect('details', NULL, NULL, array('todo' => $todo));
+        }
+        return '';
     }
 
     /**

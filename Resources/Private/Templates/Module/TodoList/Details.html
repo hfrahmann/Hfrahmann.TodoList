@@ -1,34 +1,41 @@
 
 <div class="neos-row-fluid">
     <fieldset class="neos-span5">
-        <legend>Info</legend>
+        <legend>{todo.title}</legend>
 
         <table class="neos-info-table">
             <tbody>
             <tr>
-                <th>Title</th>
-                <td>{todo.title}</td>
+                <th>Status</th>
+                <td>
+                    <f:if condition="{todo.done}">
+                        <f:then><span class="hftodos-status-done">Done</span></f:then>
+                        <f:else>Open</f:else>
+                    </f:if>
+                </td>
             </tr>
             <tr>
                 <th>Category</th>
                 <td>{todo.category.name}</td>
             </tr>
             <tr>
-                <th>Creation date</th>
+                <th>Created</th>
                 <td><f:format.date format="d.m.Y - H:i">{todo.creationDate}</f:format.date></td>
             </tr>
             <tr>
                 <th>Author</th>
-                <td>{todo.author}</td>
+                <td>{todo.author.party.name}</td>
             </tr>
             </tbody>
         </table>
 
     </fieldset>
     <fieldset class="neos-span6 neos-offset1">
-        <legend>Content</legend>
+        <legend>Description</legend>
 
-        <f:format.nl2br>{todo.content}</f:format.nl2br>
+        <div class="hftodos-description">
+            <f:format.nl2br>{todo.description}</f:format.nl2br>
+        </div>
 
     </fieldset>
 </div>
@@ -42,6 +49,14 @@
         <f:link.action action="edit" arguments="{todo: todo}" class="neos-button">
             <i class="icon-pencil icon-white"></i> Edit todo
         </f:link.action>
-        <f:form.submit value="Mark as done" class="neos-button neos-button-primary" />
+        <f:if condition="{todo.done}">
+            <f:then>
+                <f:link.action action="markTodo" arguments="{todo: todo, showDetails: true, done: false }" class="neos-button neos-button-primary">Mark as undone</f:link.action>
+            </f:then>
+            <f:else>
+                <f:link.action action="markTodo" arguments="{todo: todo, showDetails: true, done: true }" class="neos-button neos-button-primary">Mark as done</f:link.action>
+            </f:else>
+        </f:if>
+
     </div>
 </f:form>

@@ -28,7 +28,7 @@ class Todo {
      * @Flow\Validate(type="NotEmpty")
      * @Flow\Validate(type="StringLength", options={ "minimum"=1 })
      */
-    protected $content = "";
+    protected $description = "";
 
     /**
      * @var \DateTime
@@ -51,7 +51,7 @@ class Todo {
      * @var \TYPO3\Flow\Security\Account
      * @ORM\ManyToOne
      */
-    protected $author;
+    protected $author = NULL;
 
     /**
      * Construct
@@ -77,15 +77,15 @@ class Todo {
     /**
      * @return string
      */
-    public function getContent() {
-        return $this->content;
+    public function getDescription() {
+        return $this->description;
     }
 
     /**
-     * @param string $content
+     * @param string $description
      */
-    public function setContent($content) {
-        $this->content = $content;
+    public function setDescription($description) {
+        $this->description = $description;
     }
 
     /**

@@ -3,6 +3,20 @@ a.hftodos-button-add {
     width: 100% !important;
 }
 
-textarea.hftodos-content {
+textarea.hftodos-description {
     min-height: 150px !important;
+}
+
+div.hftodos-description {
+    line-height: 120%;
+    padding-top: 16px !important;
+}
+
+.hftodos-status-done {
+    color: #29d900 !important;
+}
+
+.hftodos-category-prefix {
+    font-style: italic;
+    color: #a9a9a9;
 }

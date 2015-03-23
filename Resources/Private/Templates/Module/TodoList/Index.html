@@ -47,25 +47,57 @@
                     <f:for each="{paginatedTodos}" key="key" as="todo">
                         <tr>
                             <td>
-                                <label for="check-{key}" class="neos-checkbox">
-                                    <f:form.checkbox name="todos[]" checked="{todo.done}" value="{true}"
-                                                     id="check-{key}"/>
+                                <f:form action="markTodo">
+                                    <f:form.hidden name="todo" value="{todo}" />
+                                    <label for="check-{key}" class="neos-checkbox">
+                                        <f:form.checkbox name="done" checked="{todo.done}"
+                                                     onclick="$.post('{f:uri.action(action:'markTodo')}', $(this.form).serialize());"
+                                                     value="{true}" id="check-{key}"/>
                                     <span></span></label>
+                                </f:form>
                             </td>
                             <td>
-                                <f:link.action action="details" arguments="{todo: todo}">{todo.title}</f:link.action>
+                                <f:link.action action="details" arguments="{todo: todo}">
+                                    <f:if condition="{todo.category}"><span class="hftodos-category-prefix">{todo.category.name}: </span></f:if>
+                                    {todo.title}
+                                </f:link.action>
                             </td>
                             <td>
                                 <f:format.date format="d.m.Y - H:i">{todo.creationDate}</f:format.date>
                             </td>
-                            <td>-</td>
+                            <td>
+                                {todo.author.party.name}
+                            </td>
                             <td class="neos-action neos-aRight">
                                 <f:link.action class="neos-button" action="edit" arguments="{todo: todo}">
                                     <i class="icon-pencil icon-white"></i>
                                 </f:link.action>
-                                <a class="neos-button neos-button-danger">
+                                <a class="neos-button neos-button-danger" data-toggle="modal" href="#deletetodo-{key}">
                                     <i class="icon-trash icon-white"></i>
                                 </a>
+
+                                <div class="neos-hide" id="deletetodo-{key}">
+                                    <div class="neos-modal">
+                                        <div class="neos-modal-header">
+                                            <button type="button" class="neos-close neos-button" data-dismiss="modal"></button>
+                                            <div class="neos-header">Do you really want to delete the todo?</div>
+                                            <div>
+                                                <div class="neos-subheader">
+                                                    <p>This will delete the todo. This operation cannot be undone.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="neos-modal-footer">
+                                            <a href="#" class="neos-button" data-dismiss="modal">Cancel</a>
+                                            <f:form action="delete" arguments="{todo: todo}" class="neos-inline">
+                                                <button type="submit" class="neos-button neos-button-danger" title="Delete todo">
+                                                    Yes, delete the todo
+                                                </button>
+                                            </f:form>
+                                        </div>
+                                    </div>
+                                    <div class="neos-modal-backdrop neos-in"></div>
+                                </div>
                             </td>
                         </tr>
                     </f:for>
@@ -75,3 +107,4 @@
 
     </div>
 </div>
+
