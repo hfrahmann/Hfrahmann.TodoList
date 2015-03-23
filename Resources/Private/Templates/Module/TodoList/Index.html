@@ -3,7 +3,7 @@
 
         <h2>
             Categories
-            <span id="neos-tags-list-edit-toggle" class="neos-button"><i class="icon-pencil"></i></span>
+            <f:link.action action="editCategories" id="neos-tags-list-edit-toggle" class="neos-button"><i class="icon-pencil"></i></f:link.action>
         </h2>
         <ul class="neos-tags-list">
             <li>
@@ -32,7 +32,7 @@
 
     <div class="neos-span10">
 
-        <f:widget.paginate objects="{todos}" as="paginatedTodos" configuration="{itemsPerPage: 15}">
+        <f:widget.paginate objects="{todos}" as="paginatedTodos" configuration="{itemsPerPage: 10}">
             <table class="neos-table">
                 <thead>
                     <tr>
@@ -76,7 +76,7 @@
                                     <i class="icon-trash icon-white"></i>
                                 </a>
 
-                                <div class="neos-hide" id="deletetodo-{key}">
+                                <div class="neos-hide neos-aLeft" id="deletetodo-{key}">
                                     <div class="neos-modal">
                                         <div class="neos-modal-header">
                                             <button type="button" class="neos-close neos-button" data-dismiss="modal"></button>

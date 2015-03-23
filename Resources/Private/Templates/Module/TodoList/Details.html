@@ -40,23 +40,42 @@
     </fieldset>
 </div>
 
-<f:form action="done">
-    <div class="neos-footer">
-        <f:link.action action="index" class="neos-button">Back</f:link.action>
-        <button class="neos-button neos-button-danger" data-toggle="modal" href="#delete">
-            <i class="icon-trash icon-white"></i> Delete todo
-        </button>
-        <f:link.action action="edit" arguments="{todo: todo}" class="neos-button">
-            <i class="icon-pencil icon-white"></i> Edit todo
-        </f:link.action>
-        <f:if condition="{todo.done}">
-            <f:then>
-                <f:link.action action="markTodo" arguments="{todo: todo, showDetails: true, done: false }" class="neos-button neos-button-primary">Mark as undone</f:link.action>
-            </f:then>
-            <f:else>
-                <f:link.action action="markTodo" arguments="{todo: todo, showDetails: true, done: true }" class="neos-button neos-button-primary">Mark as done</f:link.action>
-            </f:else>
-        </f:if>
-
+<div class="neos-footer">
+    <f:link.action action="index" class="neos-button">Back</f:link.action>
+    <button class="neos-button neos-button-danger" data-toggle="modal" href="#deletetodo">
+        <i class="icon-trash icon-white"></i> Delete todo
+    </button>
+    <f:link.action action="edit" arguments="{todo: todo}" class="neos-button">
+        <i class="icon-pencil icon-white"></i> Edit todo
+    </f:link.action>
+    <f:if condition="{todo.done}">
+        <f:then>
+            <f:link.action action="markTodo" arguments="{todo: todo, showDetails: true, done: false }" class="neos-button neos-button-primary">Mark as undone</f:link.action>
+        </f:then>
+        <f:else>
+            <f:link.action action="markTodo" arguments="{todo: todo, showDetails: true, done: true }" class="neos-button neos-button-primary">Mark as done</f:link.action>
+        </f:else>
+    </f:if>
+</div>
+<div class="neos-hide" id="deletetodo">
+    <div class="neos-modal">
+        <div class="neos-modal-header">
+            <button type="button" class="neos-close neos-button" data-dismiss="modal"></button>
+            <div class="neos-header">Do you really want to delete the todo?</div>
+            <div>
+                <div class="neos-subheader">
+                    <p>This will delete the todo. This operation cannot be undone.</p>
+                </div>
+            </div>
+        </div>
+        <div class="neos-modal-footer">
+            <a href="#" class="neos-button" data-dismiss="modal">Cancel</a>
+            <f:form action="delete" arguments="{todo: todo}" class="neos-inline">
+                <button type="submit" class="neos-button neos-button-danger" title="Delete todo">
+                    Yes, delete the todo
+                </button>
+            </f:form>
+        </div>
     </div>
-</f:form>
+    <div class="neos-modal-backdrop neos-in"></div>
+</div>

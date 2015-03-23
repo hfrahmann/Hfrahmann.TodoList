@@ -5,8 +5,6 @@ namespace Hfrahmann\TodoList\Controller\Module;
  * This script belongs to the TYPO3 Flow package "Hfrahmann.TodoList".    *
  *                                                                        */
 
-use Doctrine\Tests\ORM\Mapping\Cat;
-use Hfrahmann\ConsoleLogging\Logger;
 use Hfrahmann\TodoList\Domain\Model\Category;
 use Hfrahmann\TodoList\Domain\Model\Todo;
 use Hfrahmann\TodoList\Domain\Repository\CategoryRepository;
@@ -37,12 +35,6 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
      * @var \TYPO3\Flow\Security\Context
      */
     protected $securityContext;
-
-    /**
-     * @Flow\Inject
-     * @var Logger
-     */
-    protected $logger;
 
     /**
      * Index Action
@@ -131,6 +123,14 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
      */
     public function detailsAction(Todo $todo) {
         $this->view->assign('todo', $todo);
+    }
+
+    /**
+     *
+     */
+    public function editCategoriesAction() {
+        $categories = $this->categoryRepository->findAll();
+        $this->view->assign('categories', $categories);
     }
 
 }
