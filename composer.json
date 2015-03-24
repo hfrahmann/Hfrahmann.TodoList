@@ -1,7 +1,15 @@
 {
     "name": "hfrahmann/todolist",
     "type": "typo3-flow-package",
-    "description": "Add description here",
+    "description":"This package contains a todo module for the TYPO3 Neos Backend.",
+    "keywords": ["todo", "neos", "typo3"],
+    "homepage": "https://github.com/hfrahmann/Hfrahmann.TodoList",
+    "version": "1.0",
+    "license": "MIT",
+    "authors":[{
+      "name": "Hendrik Frahmann",
+      "role": "Developer"
+    }],
     "require": {
         "typo3/flow": "*"
     },

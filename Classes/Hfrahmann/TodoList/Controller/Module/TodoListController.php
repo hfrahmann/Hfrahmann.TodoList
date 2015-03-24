@@ -133,6 +133,41 @@ class TodoListController extends \TYPO3\Neos\Controller\Module\AbstractModuleCon
         $this->view->assign('categories', $categories);
     }
 
+    /**
+     * @param string $name
+     * @return string
+     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     */
+    public function addCategoryAction($name) {
+        $category = new Category();
+        $category->setName($name);
+        $this->categoryRepository->add($category);
+        $this->redirect('editCategories');
+        return '';
+    }
+
+    /**
+     * @param Category $category
+     * @return string
+     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     */
+    public function updateCategoryAction(Category $category) {
+        $this->categoryRepository->update($category);
+        $this->redirect('editCategories');
+        return '';
+    }
+
+    /**
+     * @param Category $category
+     * @return string
+     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     */
+    public function deleteCategoryAction(Category $category) {
+        $this->categoryRepository->remove($category);
+        $this->redirect('editCategories');
+        return '';
+    }
+
 }
 
 ?>

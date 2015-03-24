@@ -39,6 +39,7 @@ class Todo {
     /**
      * @var Category
      * @ORM\ManyToOne(inversedBy="todos")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $category = NULL;
 
@@ -50,6 +51,7 @@ class Todo {
     /**
      * @var \TYPO3\Flow\Security\Account
      * @ORM\ManyToOne
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $author = NULL;
 
